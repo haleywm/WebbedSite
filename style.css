@@ -1,0 +1,3 @@
+.inline p, .inline h3 {
+    display: span;
+}
