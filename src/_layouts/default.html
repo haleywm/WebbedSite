@@ -16,15 +16,18 @@
 </head>
 
 <body>
+    <div class="body">
+        <div class="leftbar box">
+            <header>
+                <h1 class="logo">{{ page.title }}</h1>
+            </header>
+            {% include navigation.html %}
+        </div>
 
-    <header>
-        <h1>{{ page.title }}</h1>
-    </header>
-
-    {% include navigation.html %}
-
-    {{ content }}
-
+        <main class="main box">
+            {{ content }}
+        </main>
+    </div>
     <footer></footer>
 </body>
 

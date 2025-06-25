@@ -1,0 +1,64 @@
+---
+---
+
+@use 'sass:color';
+
+$font-stack: Helvetica;
+$background: #F0F0F0;
+$text: #0A0A0A;
+$primary: orange;
+$primary-bright: color.scale($primary, $lightness: 10%);
+$primary-dark: color.scale($primary, $lightness: -10%);
+$pad-amount: 8px;
+
+* {
+    font-family: $font-stack;
+    color: $text;
+}
+
+body {
+    margin: 0;
+    background-color: $background;
+}
+
+.body {
+    margin: 0 auto;
+    max-width: 980px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    gap: calc($pad-amount * 2);
+
+    .main {
+        width: 80%;
+    }
+
+    .leftbar {
+        width: 20%;
+    }
+}
+
+.box {
+    border: 2px solid $primary;
+    border-radius: 5px;
+    padding: 0 $pad-amount;
+}
+
+nav {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    padding-bottom: 2em;
+
+    a {
+        text-align: center;
+    }
+}
+
+.logo {
+    text-align: center;
+}
+
+a.currentPage {
+    font-weight: bold;
+}
