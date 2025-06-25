@@ -4,6 +4,6 @@
 set -e
 
 # Build
-JEKYLL_ENV=production jekyll build
+JEKYLL_ENV=production bundle exec jekyll build
 
 rsync --archive --verbose --delete www/ haleywm@192.168.0.3:internet-caddy/www/
