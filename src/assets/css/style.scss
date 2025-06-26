@@ -5,7 +5,7 @@
 
 $font-stack: Helvetica;
 $background: #7e3e93;
-$text-background: #F0F0F0;
+$text-background: #EEE;
 $text: #0A0A0A;
 $primary: #cd75ff;
 $primary-bright: color.scale($primary, $lightness: 10%);
@@ -35,8 +35,7 @@ body {
 
 .body {
     @extend .sidebyside;
-    margin: 0 auto;
-    margin-top: 2em;
+    margin: 2em auto;
     max-width: 980px;
 
     .main {
