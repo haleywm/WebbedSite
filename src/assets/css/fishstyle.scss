@@ -1,0 +1,14 @@
+---
+---
+
+p {
+    background-clip: text !important;
+    color: transparent;
+    background: url("/assets/images/cropfish.webp");
+    background-size: 2em;
+}
+
+body {
+    background-image: url(/assets/images/cropfish.webp) !important;
+    background-size: 100px !important;
+}

@@ -4,11 +4,14 @@
 @use 'sass:color';
 
 $font-stack: Helvetica;
-$background: #F0F0F0;
+$background: #7e3e93;
+$text-background: #F0F0F0;
 $text: #0A0A0A;
-$primary: orange;
+$primary: #cd75ff;
 $primary-bright: color.scale($primary, $lightness: 10%);
 $primary-dark: color.scale($primary, $lightness: -10%);
+// Pad amount is specifically used for horizontal padding.
+// For vertical padding just use what feels right (1em)
 $pad-amount: 8px;
 
 * {
@@ -19,15 +22,22 @@ $pad-amount: 8px;
 body {
     margin: 0;
     background-color: $background;
+    background-image: url(/assets/images/background.webp);
 }
 
-.body {
-    margin: 0 auto;
-    max-width: 980px;
+.sidebyside {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     gap: calc($pad-amount * 2);
+    align-items: flex-start;
+}
+
+.body {
+    @extend .sidebyside;
+    margin: 0 auto;
+    margin-top: 2em;
+    max-width: 980px;
 
     .main {
         width: 80%;
@@ -42,6 +52,7 @@ body {
     border: 2px solid $primary;
     border-radius: 5px;
     padding: 0 $pad-amount;
+    background-color: $text-background;
 }
 
 nav {
@@ -59,6 +70,20 @@ nav {
     text-align: center;
 }
 
+a {
+    background-color: $text-background;
+    padding: 0.2em 0;
+}
+
 a.currentPage {
     font-weight: bold;
+    background-color: #bdbdbd;
+}
+
+.dark-on-hover:hover {
+    filter: brightness(0.9);
+}
+
+img {
+    margin: 1em 0;
 }
