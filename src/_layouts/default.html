@@ -19,12 +19,13 @@
     <div class="body">
         <div class="leftbar box">
             <header>
-                <h1 class="logo">{{ page.title }}</h1>
+                <img class="logo" src="/assets/images/cropfish.webp" />
             </header>
             {% include navigation.html %}
         </div>
 
         <main class="main box">
+            <h1 class="pagetitle">{{ page.title }}</h1>
             {{ content }}
         </main>
     </div>
