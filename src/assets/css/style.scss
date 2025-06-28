@@ -109,3 +109,9 @@ code {
     font-family: "SauceCodePro NF", "DejaVu Sans Mono", monospace;
     background-color: color.scale($text-background, $lightness: -15%);;
 }
+
+.red {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}

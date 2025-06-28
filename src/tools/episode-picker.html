@@ -1,0 +1,42 @@
+---
+layout: default
+title: "Episode Picker"
+sections:
+  - name: Star Trek
+    link: star-trek
+    source: "/assets/data/startrek.json"
+    categories:
+      - name: The Original Series
+        key: "tos"
+        checked: true
+      - name: The Next Generation
+        key: "tng"
+        checked: true
+      - name: Deep Space 9
+        key: "ds9"
+        checked: true
+      - name: Voyager
+        key: "voy"
+        checked: true
+---
+
+<script src="/assets/scripts/episodepicker.js"></script>
+
+{% for section in page.sections %}
+<h1 id="{{ section.link }}">{{ section.name }}</h1>
+
+<form id="form-{{ section.link }}">
+<fieldset>
+    <legend>Select Categories:</legend>
+    {% for cat in section.categories %}
+    <div>
+        <input type="checkbox" name="{{ cat.key }}"{% if cat.checked %} checked{% endif %} />
+        <label for="{{ cat.key }}">{{ cat.name }}</label>
+    </div>
+    {% endfor %}
+    <input type="button" value="Select Episode" onclick="pickEpisode('{{ section.source }}', 'form-{{ section.link }}')" />
+</fieldset>
+</form>
+
+<hr />
+{% endfor %}
