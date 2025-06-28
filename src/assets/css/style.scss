@@ -3,7 +3,7 @@
 
 @use 'sass:color';
 
-$font-stack: Helvetica;
+$font-stack: Verdana, sans-serif;
 $background: #7e3e93;
 $text-background: #EEE;
 $text: #0A0A0A;
@@ -103,4 +103,9 @@ img {
     -webkit-text-stroke: $text 1px;
     margin: 1em auto 0 auto;
     text-align: center;
+}
+
+code {
+    font-family: "SauceCodePro NF", "DejaVu Sans Mono", monospace;
+    background-color: color.scale($text-background, $lightness: -15%);;
 }

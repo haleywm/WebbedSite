@@ -4,9 +4,6 @@ A thing where I try to add 1 thing a day to a website to try to slowly make some
 
 ## Things I want to do:
 
-- Make the website look better
-    - Make a proper font stack based on some rules I'm sure exist about reasonable fallbacks depending on what fonts people have
-    - Move the page title somewhere different, decide if I need a logo
 - Figure out how to automatically choose between a light and dark theme based on browser setting
 - Look at other sites and find inspiration for stuff to add to mine
 - Add "Fun tools" section
