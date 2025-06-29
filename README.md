@@ -16,7 +16,8 @@ A thing where I try to add 1 thing a day to a website to try to slowly make some
     - Make pong 2, with explosions, intense camera angles, and groovy sound effects
     - Maybe try to make tetris again, or my very own take on a minesweeper clone
     - See if I find creativity to do more
-- A "things I like" section would be fun
+- A "things I like" section (it looks like lots of other indie website people call them "Shrines" and have specific pages dedicated to their favourite topic) sounds fun
     - Discuss self hosting
     - Clean up my guide to server hosting and add it
     - Rant about other things I like whenever I feel like
+- Add a "links" section with my own little 88x31 sticker, and links to some handy resources or websites that I love.
