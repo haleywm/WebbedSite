@@ -110,6 +110,10 @@ code {
     background-color: color.scale($text-background, $lightness: -15%);;
 }
 
+li {
+    padding: 1px 0;
+}
+
 .red {
     color: red;
     font-weight: bold;

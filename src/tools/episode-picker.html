@@ -18,14 +18,21 @@ sections:
       - name: Voyager
         key: "voy"
         checked: true
+      - name: Enterprise
+        key: "ent"
+        checked: false
 ---
 
 <script src="/assets/scripts/episodepicker.js"></script>
 
 {% for section in page.sections %}
+
+{% capture form_id %}form-{{ section.link }}{% endcapture %}
+{% capture output_id %}output-{{ section.link }}{% endcapture %}
+
 <h1 id="{{ section.link }}">{{ section.name }}</h1>
 
-<form id="form-{{ section.link }}">
+<form id="{{ form_id }}">
 <fieldset>
     <legend>Select Categories:</legend>
     {% for cat in section.categories %}
@@ -34,9 +41,11 @@ sections:
         <label for="{{ cat.key }}">{{ cat.name }}</label>
     </div>
     {% endfor %}
-    <input type="button" value="Select Episode" onclick="pickEpisode('{{ section.source }}', 'form-{{ section.link }}')" />
+    <input type="button" value="Select Episode" onclick="showEpisode('{{ section.source }}', '{{ form_id }}', '{{ output_id }}')" />
 </fieldset>
 </form>
+
+<div id="{{ output_id }}"></div>
 
 <hr />
 {% endfor %}
