@@ -10,3 +10,5 @@ List of websites that I like the vibes off. Sometimes with specific things I act
 - https://petrapixel.neocities.org and https://entropically.neocities.org are full of personality. I like the gallery at https://petrapixel.neocities.org/about/cats, I want to do something similar for my Shesha page.
 - https://wrender.neocities.org/home I really enjoy the way the comment box background stays fixed even when you scroll, looks like this uses `background-attachment: fixed;`, I gotta try that.
 - https://aiston.scungled.gay/projects/homelab I like the rest of the site as well but I like the way they break down what's on their homelab, and it's a lot of different opinions from the type of tech bro who normally shares their homelab setup. I can get inspiration from this for website stuff and homelab stuff that's like a 2 in 1 special.
+- https://housepen.nekoweb.org/ Full of personality
+- https://cloverbell.neocities.org/ I wish I could be like this

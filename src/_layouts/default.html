@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <title>{{ page.title }}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="" />
+    <meta name="description" content="{{ page.description }}" />
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />    
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicons/android-chrome-512x512.png">
@@ -19,7 +19,7 @@
     <div class="body">
         <div class="leftbar box">
             <header>
-                <img class="logo" src="/assets/images/cropfish.webp" />
+                <img class="logo" src="/assets/images/cropfish.webp" alt="A logo that's just a stretched out picture of a fish pogging." />
             </header>
             {% include navigation.html %}
         </div>

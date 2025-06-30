@@ -2,3 +2,10 @@ source: "src/"
 destination: "www"
 permalink: pretty
 url: https://poggers.au
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+      description: "It's time to pog frog"
