@@ -11,7 +11,6 @@ A thing where I try to add 1 thing a day to a website to try to slowly make some
     - Doctor Who maybe, sorted by doctor
 - Create a "Section shortcut" include that will allow people to jump to any specific header in the page. It can be fed by front matter data marking what headers are notable.
 - Add Election tool
-- Flesh out about me when I've earned it
 - Organise files better
 - Try to get back into making some games
     - Make pong to find a nice easy browser friendly game engine
