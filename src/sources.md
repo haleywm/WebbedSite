@@ -13,3 +13,4 @@ Here are the assets used in my website. If it's not listed here, and I don't ack
     - [Star Trek Deep Space 9](https://www.tvmaze.com/shows/493/star-trek-deep-space-nine/episodeguide)
     - [Star Trek Voyager](https://www.tvmaze.com/shows/492/star-trek-voyager/episodeguide)
     - [Star Trek Enterprise](https://www.tvmaze.com/shows/714/star-trek-enterprise/episodeguide)
+    - [The Simpsons](https://www.tvmaze.com/shows/83/the-simpsons/episodeguide)
