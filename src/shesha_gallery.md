@@ -19,6 +19,8 @@ Fun Shesha facts:
 
 (Todo: Add a proper gallery when you click on the pictures.)
 
+
+<div class="image-gallery" markdown="1">
 ![A picture of Shesha the snake laying in her enclosure. She is partially curled up, with her head laying just past the edge of her tail, while more of her body trails into leaves on the right, obscuring the rest of her body.](/assets/gallery-images/shesha-0.webp)
 ![A picture of Shesha the snake, her head rests on-top of a small cave-style snake hide on the left of the image, while her body trails off into a leafy section on the left. Everything rests on-top of red sand, with pieces of vermiculate mixed in.](/assets/gallery-images/shesha-1.webp)
 ![Shesha the snake is curled up and mostly hidden inside of a small cave-style snake hide. Her face and part of her body can be seen peaking out through the door.](/assets/gallery-images/shesha-2.webp)
@@ -36,3 +38,4 @@ Fun Shesha facts:
 ![Shesha doing a do](/assets/gallery-images/shesha-15.webp)
 ![Shesha doing a do](/assets/gallery-images/shesha-16.webp)
 ![Shesha doing a do](/assets/gallery-images/shesha-17.webp)
+</div>
