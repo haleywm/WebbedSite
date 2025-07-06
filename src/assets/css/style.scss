@@ -120,3 +120,16 @@ li {
     font-weight: bold;
     text-decoration: underline;
 }
+
+.image-gallery p {
+    display: flex;
+    overflow-x: hidden;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: $pad-amount;
+    img {
+        width: calc(100% / 3 - $pad-amount * 2/3);
+        margin: 0;
+    }
+}
