@@ -1,0 +1,12 @@
+<div class="leftbar box">
+    <header>
+        <img class="logo" src="/assets/images/cropfish.webp" alt="A logo that's just a stretched out picture of a fish pogging." />
+    </header>
+    {% include navigation.html %}
+    <hr />
+    <div>
+        <p class="boxtitle">Current Status:</p>
+        {{ site.data.status.status | markdownify }}
+        <p class="date">- {{ site.data.status.status_date | date: "%A, %e/%m/%y" }}</p>
+    </div>
+</div>

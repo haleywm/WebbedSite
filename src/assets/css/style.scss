@@ -48,6 +48,29 @@ body {
     }
 }
 
+.leftbar div {
+    border: 1px dashed $text;
+    margin: 1em 0;
+    padding: 0.2em;
+    position: relative;
+    p {
+        margin: 0.5em 0.2em;
+    }
+    .boxtitle {
+        position: absolute;
+        top: -0.75em;
+        left: 1em;
+        margin: 0;
+        background-color: $text-background;
+    }
+    .date {
+        font-size: 0.8em;
+        line-height: 0.5em;
+        font-style: italic;
+        text-align: right;
+    }
+}
+
 .box {
     border: 2px solid $primary;
     border-radius: 5px;
@@ -59,7 +82,7 @@ nav {
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
-    padding-bottom: 2em;
+    margin-bottom: 1em;
 
     a {
         text-align: center;
