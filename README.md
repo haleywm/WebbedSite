@@ -21,3 +21,15 @@ A thing where I try to add 1 thing a day to a website to try to slowly make some
     - Clean up my guide to server hosting and add it
     - Rant about other things I like whenever I feel like
 - Add a "links" section with my own little 88x31 sticker, and links to some handy resources or websites that I love.
+
+Rambles I want to make:
+
+- Self Hosting
+- Making your own NAS
+- Right to repair and fixing your own stuff
+- Obligatory post about how cool the indie web is and why you should make your own website
+- Animal Crossing
+- My experience caring for a snake
+- Living with chronic illness
+- Why I strongly dislike pseudoscience
+- 

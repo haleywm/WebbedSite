@@ -9,3 +9,6 @@ defaults:
     values:
       layout: "default"
       description: "It's time to pog frog"
+collections:
+  rambles:
+    output: true

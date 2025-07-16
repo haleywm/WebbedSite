@@ -17,6 +17,7 @@ $pad-amount: 8px;
 * {
     font-family: $font-stack;
     color: $text;
+    line-height: 1.5;
 }
 
 body {
@@ -110,6 +111,7 @@ a.currentPage {
 
 img {
     margin: 1em 0;
+    max-width: 100%;
 }
 
 .pagetitle {
@@ -131,7 +133,8 @@ img {
 
 code {
     font-family: "SauceCodePro NF", "DejaVu Sans Mono", monospace;
-    background-color: color.scale($text-background, $lightness: -15%);;
+    background-color: color.scale($text-background, $lightness: -15%);
+    padding: 0 1px;
 }
 
 li {

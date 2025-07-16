@@ -7,15 +7,6 @@ Here is where I will link my rambles with opinions on different topics. Think of
 
 Rambles:
 
-- TODO
-
-Rambles I want to make:
-
-- Self Hosting
-- Making your own NAS
-- Right to repair and fixing your own stuff
-- Obligatory post about how cool the indie web is and why you should make your own website
-- Animal Crossing
-- My experience caring for a snake
-- Living with chronic illness
-- Why I strongly dislike pseudoscience
+{% for ramble in site.rambles %}
+- [{{ ramble.title }}]({{ ramble.url }}) - {{ ramble.description }}
+{% endfor %}
