@@ -8,5 +8,6 @@ JEKYLL_ENV=production bundle exec jekyll build
 
 # Compress
 zstd -v -r www
+find www -type f -not -path "*.zst" -not -path "*.br" | xargs brotli -v
 
 rsync --archive --verbose --delete www/ haleywm@192.168.0.3:internet-caddy/www/

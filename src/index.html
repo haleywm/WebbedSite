@@ -22,7 +22,7 @@ description: "Welcome to poggers.au! This is my personal website where I do what
 
 <section>
     <div>
-        <h3>Today's Addition(s) ({{ site.data.status.daily_date | date: "%A, %e/%m/%y" }}):</h3>
+        <h3>Today's Addition(s) ({{ site.data.status.daily_date | date: "%e/%m/%y" }}):</h3>
         {{ site.data.status.daily_update | markdownify }}
     </div>
 </section>

@@ -4,10 +4,10 @@
 @use 'sass:color';
 
 $font-stack: Verdana, sans-serif;
-$background: #7e3e93;
-$text-background: #EEE;
-$text: #0A0A0A;
-$primary: #cd75ff;
+$background: #ff7f50;
+$text-background: #ffece5;
+$text: #330e00;
+$primary: #f7936e;
 $primary-bright: color.scale($primary, $lightness: 10%);
 $primary-dark: color.scale($primary, $lightness: -10%);
 // Pad amount is specifically used for horizontal padding.
@@ -20,10 +20,13 @@ $pad-amount: 8px;
     line-height: 1.5;
 }
 
-body {
-    margin: 0;
+html {
     background-color: $background;
     background-image: url(/assets/images/background.webp);
+}
+
+body {
+    margin: 0;
 }
 
 .sidebyside {
@@ -133,7 +136,7 @@ img {
 
 code {
     font-family: "SauceCodePro NF", "DejaVu Sans Mono", monospace;
-    background-color: color.scale($text-background, $lightness: -15%);
+    background-color: color.scale($text-background, $lightness: -12%);
     padding: 0 1px;
 }
 
