@@ -6,6 +6,7 @@
 $font-stack: Verdana, sans-serif;
 $background: #ff7f50;
 $text-background: #ffece5;
+$dark-text-background: color.scale($text-background, $lightness: -12%);
 $text: #330e00;
 $primary: #f7936e;
 $primary-bright: color.scale($primary, $lightness: 10%);
@@ -105,7 +106,7 @@ a {
 
 a.currentPage {
     font-weight: bold;
-    background-color: #bdbdbd;
+    background-color: $dark-text-background;
 }
 
 .dark-on-hover:hover {
@@ -136,7 +137,7 @@ img {
 
 code {
     font-family: "SauceCodePro NF", "DejaVu Sans Mono", monospace;
-    background-color: color.scale($text-background, $lightness: -12%);
+    background-color: $dark-text-background;
     padding: 0 1px;
 }
 
