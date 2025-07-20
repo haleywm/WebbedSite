@@ -101,12 +101,12 @@ nav {
 }
 
 a {
-    background-color: $text-background;
     padding: 0.2em 0;
 }
 
 a.currentPage {
     font-weight: bold;
+    background-color: $dark-text-background;
 }
 
 .dark-on-hover:hover {
