@@ -1,0 +1,16 @@
+---
+title: "Preferential Poll"
+description: "A tool to make polls, with full preferential voting support."
+published: false
+---
+<script>
+{% if jekyll.environment == "production" %}
+const API_ENDPOINT = "https://election.poggers.au"
+{% else %}
+const API_ENDPOINT = "http://localhost:8000"
+{% endif %}
+</script>
+<script src="/assets/scripts/preferential-poll.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/css/preferential-poll.css" />    
+
+<div id="poll-container"></div>

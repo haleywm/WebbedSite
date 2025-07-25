@@ -1,0 +1,39 @@
+---
+---
+
+@use 'sass:color';
+$background: #ff7f50;
+
+.clickable {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button {
+    // Big sexy button
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 1em 2em;
+    margin: 0 0 1em 1em;
+    border-radius: 0.5em;
+    background-image: linear-gradient(
+        120deg,
+        color.scale($background, $lightness: -25%, $alpha: -60%),
+        color.scale($background, $lightness: 45%, $alpha: -80%)
+    );
+    background-color: color.scale($background,  $lightness: 25%);
+    box-shadow:
+        inset -2px -3px 5px rgba(0, 0, 0, 0.5),
+        inset 2px 3px 5px rgba(255, 255, 255, 0.2);
+}
+
+button:hover {
+    background-color: $background;
+}
+
+button:active {
+    box-shadow:
+        inset 2px 3px 5px rgba(0, 0, 0, 0.5),
+        inset -2px -3px 5px rgba(255, 255, 255, 0.2);
+}
