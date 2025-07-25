@@ -1,6 +1,6 @@
 let showCache = {}
 
-async function pickEpisode(dataSource, formId, outputId) {
+async function pickEpisode(dataSource, formId) {
     // Get show json
     let episodes = null
     if(dataSource in showCache) {
@@ -42,7 +42,7 @@ async function pickEpisode(dataSource, formId, outputId) {
 }
 
 function showEpisode(dataSource, formId, outputId) {
-    pickEpisode(dataSource, formId, outputId)
+    pickEpisode(dataSource, formId)
         .then((episode) => {
             let out = document.getElementById(outputId)
             out.innerHTML = `<h3>${episode.title}</h3>\n<p>${episode.description}</p>`
