@@ -1,7 +1,4 @@
----
----
-
-@use 'sass:color';
+--- --- @use 'sass:color';
 $background: #ff7f50;
 
 .clickable {
@@ -17,15 +14,13 @@ button {
     padding: 1em 2em;
     margin: 0 0 1em 1em;
     border-radius: 0.5em;
-    background-image: linear-gradient(
-        120deg,
-        color.scale($background, $lightness: -25%, $alpha: -60%),
-        color.scale($background, $lightness: 45%, $alpha: -80%)
-    );
-    background-color: color.scale($background,  $lightness: 25%);
+    background-image: linear-gradient(120deg,
+            color.scale($background, $lightness: -25%, $alpha: -60%),
+            color.scale($background, $lightness: 45%, $alpha: -80%));
+    background-color: color.scale($background, $lightness: 25%);
     box-shadow:
         inset -2px -3px 5px rgba(0, 0, 0, 0.5),
-        inset 2px 3px 5px rgba(255, 255, 255, 0.2);
+        inset 5px 5px 4px rgba(255, 255, 255, 0.8);
 }
 
 button:hover {
@@ -34,6 +29,33 @@ button:hover {
 
 button:active {
     box-shadow:
-        inset 2px 3px 5px rgba(0, 0, 0, 0.5),
-        inset -2px -3px 5px rgba(255, 255, 255, 0.2);
+        inset 5px 5px 4px rgba(0, 0, 0, 0.2),
+        inset -2px -3px 5px rgba(255, 255, 255, 0.5);
+    background-color: color.scale($background, $blackness: 20%);
+    padding: 0.9em 2.1em 1.1em 1.9em;
+}
+
+.formContainer {
+    div {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        margin-bottom: 0.2em;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    label {
+        align-self: center;
+    }
+
+    input {
+        height: 1.5em;
+    }
+
+    input[type="checkbox"] {
+        width: 1.5em;
+        margin-left: 0;
+    }
 }

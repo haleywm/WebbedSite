@@ -8,11 +8,17 @@ function displayCurrentPolls() {
             return response.json()
         })
         .then((pollList) => {
+            // Get the container
             let display = document.getElementById("poll-container")
+
+            // Add a header
             let pollHeader = document.createElement("h2")
             pollHeader.appendChild(document.createTextNode("Current Polls:"))
+
+            // Create a list of every poll
+            // Polls should be given in order of newest first
             let pollListHTML = document.createElement("ul")
-            for (const pollItem of pollList.reverse()) {
+            for (const pollItem of pollList) {
                 let htmlItem = document.createElement("li")
                 htmlItem.classList.add("clickable")
                 let text = document.createTextNode(pollItem.election_name)
@@ -21,7 +27,11 @@ function displayCurrentPolls() {
                 pollListHTML.appendChild(htmlItem)
             }
 
-            display.replaceChildren(pollHeader, pollListHTML)
+            let createButton = document.createElement("button")
+            createButton.appendChild(document.createTextNode("Create New Poll"))
+            createButton.setAttribute("onclick", "createNewPoll()")
+
+            display.replaceChildren(pollHeader, pollListHTML, createButton)
         })
 }
 
@@ -207,6 +217,108 @@ function displayResults(pollData) {
             // Display results
             display.replaceChildren(...children)
         })
+}
+
+function createNewPoll() {
+    // For once I don't actually have to fetch anything before displaying that's fun
+    // First, do the usual of getting the output area and creating a title
+    let display = document.getElementById("poll-container")
+    let title = document.createElement("h2")
+    title.appendChild(document.createTextNode("Create a new Poll:"))
+    let formContainer = document.createElement("form")
+    formContainer.classList.add("formContainer")
+
+    // Form Content:
+    // Poll title
+    let pollTitleDiv = document.createElement("div")
+    formContainer.appendChild(pollTitleDiv)
+    let pollTitleLabel = document.createElement("label")
+    pollTitleDiv.appendChild(pollTitleLabel)
+    pollTitleLabel.appendChild(document.createTextNode("Election Name:"))
+    pollTitleLabel.setAttribute("for", "election_name")
+    let pollTitleInput = document.createElement("input")
+    pollTitleDiv.appendChild(pollTitleInput)
+    pollTitleInput.setAttribute("type", "text")
+    pollTitleInput.setAttribute("required", true)
+    pollTitleInput.setAttribute("name", "election_name")
+    pollTitleInput.setAttribute("id", "election_name")
+
+    // Poll Description
+    let pollDescriptionDiv = document.createElement("div")
+    formContainer.appendChild(pollDescriptionDiv)
+    let pollDescriptionLabel = document.createElement("label")
+    pollDescriptionDiv.appendChild(pollDescriptionLabel)
+    pollDescriptionLabel.appendChild(document.createTextNode("Election Description:"))
+    pollDescriptionLabel.setAttribute("for", "election_description")
+    let pollDescriptionInput = document.createElement("textarea")
+    pollDescriptionDiv.appendChild(pollDescriptionInput)
+    pollDescriptionInput.setAttribute("name", "election_description")
+    pollDescriptionInput.setAttribute("id", "election_description")
+
+    // Number of winners
+    let winnerCountDiv = document.createElement("div")
+    formContainer.appendChild(winnerCountDiv)
+    let winnerCountLabel = document.createElement("label")
+    winnerCountDiv.appendChild(winnerCountLabel)
+    winnerCountLabel.appendChild(document.createTextNode("Number of winners:"))
+    winnerCountLabel.setAttribute("for", "winner_amount")
+    let winnerCountInput = document.createElement("input")
+    winnerCountDiv.appendChild(winnerCountInput)
+    winnerCountInput.setAttribute("type", "number")
+    winnerCountInput.setAttribute("required", true)
+    winnerCountInput.setAttribute("name", "winner_amount")
+    winnerCountInput.setAttribute("id", "winner_amount")
+    // Default value
+    winnerCountInput.setAttribute("value", "1")
+    winnerCountInput.setAttribute("min", "1")
+    winnerCountInput.setAttribute("max", "100")
+
+    // Minimum required preferences
+    let minimumPrefDiv = document.createElement("div")
+    formContainer.appendChild(minimumPrefDiv)
+    let minimumPrefLabel = document.createElement("label")
+    minimumPrefDiv.appendChild(minimumPrefLabel)
+    minimumPrefLabel.appendChild(document.createTextNode("Minimum preferences for each vote:\n(leave at 0 for all required)"))
+    minimumPrefLabel.setAttribute("for", "minimum_preferences")
+    let minimumPrefInput = document.createElement("input")
+    minimumPrefDiv.appendChild(minimumPrefInput)
+    minimumPrefInput.setAttribute("type", "number")
+    minimumPrefInput.setAttribute("required", true)
+    minimumPrefInput.setAttribute("name", "minimum_preferences")
+    minimumPrefInput.setAttribute("id", "minimum_preferences")
+    // Default value
+    minimumPrefInput.setAttribute("value", "0")
+    minimumPrefInput.setAttribute("min", "0")
+    minimumPrefInput.setAttribute("max", "100")
+
+    // Randomise Order before submission
+    let randomiseBeforeDiv = document.createElement("div")
+    formContainer.appendChild(randomiseBeforeDiv)
+    let randomiseBeforeLabel = document.createElement("label")
+    randomiseBeforeDiv.appendChild(randomiseBeforeLabel)
+    randomiseBeforeLabel.appendChild(document.createTextNode("Shuffle order of Candidates before submission:"))
+    randomiseBeforeLabel.setAttribute("for", "randomise_before")
+    let randomiseBeforeInput = document.createElement("input")
+    randomiseBeforeDiv.appendChild(randomiseBeforeInput)
+    randomiseBeforeInput.setAttribute("type", "checkbox")
+    randomiseBeforeInput.setAttribute("name", "randomise_before")
+    randomiseBeforeInput.setAttribute("id", "randomise_before")
+
+    // Randomise Order after submission
+    let randomiseAfterDiv = document.createElement("div")
+    formContainer.appendChild(randomiseAfterDiv)
+    let randomiseAfterLabel = document.createElement("label")
+    randomiseAfterDiv.appendChild(randomiseAfterLabel)
+    randomiseAfterLabel.appendChild(document.createTextNode("Shuffle order of Candidates displayed to each voter:"))
+    randomiseAfterLabel.setAttribute("for", "randomise_order")
+    let randomiseAfterInput = document.createElement("input")
+    randomiseAfterDiv.appendChild(randomiseAfterInput)
+    randomiseAfterInput.setAttribute("type", "checkbox")
+    randomiseAfterInput.setAttribute("name", "randomise_order")
+    randomiseAfterInput.setAttribute("id", "randomise_order")
+
+
+    display.replaceChildren(title, formContainer)
 }
 
 function handleError(errorResponse) {

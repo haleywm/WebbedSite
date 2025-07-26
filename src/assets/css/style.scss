@@ -1,7 +1,4 @@
----
----
-
-@use 'sass:color';
+--- --- @use 'sass:color';
 
 $font-stack: Verdana, sans-serif;
 $background: #ff7f50;
@@ -59,9 +56,11 @@ body {
     margin: 1em 0;
     padding: 0.2em;
     position: relative;
+
     p {
         margin: 0.5em 0.2em;
     }
+
     .boxtitle {
         position: absolute;
         top: -0.75em;
@@ -69,6 +68,7 @@ body {
         margin: 0;
         background-color: $text-background;
     }
+
     .date {
         font-size: 0.8em;
         line-height: 0.5em;
@@ -119,14 +119,12 @@ img {
 }
 
 .pagetitle {
-    background: linear-gradient(
-        to right,
-        lightblue,
-        lightcoral,
-        white,
-        lightcoral,
-        lightblue
-    );
+    background: linear-gradient(to right,
+            lightblue,
+            lightcoral,
+            white,
+            lightcoral,
+            lightblue);
     background-clip: text;
     color: transparent;
     width: fit-content;
@@ -158,6 +156,7 @@ li {
     align-items: flex-start;
     justify-content: flex-start;
     gap: $pad-amount;
+
     img {
         width: calc(100% / 3 - $pad-amount * 2/3);
         margin: 0;
