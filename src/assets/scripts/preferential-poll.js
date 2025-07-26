@@ -232,6 +232,7 @@ function createNewPoll() {
     // Poll title
     let pollTitleDiv = document.createElement("div")
     formContainer.appendChild(pollTitleDiv)
+    pollTitleDiv.classList.add("form-row-double")
     let pollTitleLabel = document.createElement("label")
     pollTitleDiv.appendChild(pollTitleLabel)
     pollTitleLabel.appendChild(document.createTextNode("Election Name:"))
@@ -243,21 +244,10 @@ function createNewPoll() {
     pollTitleInput.setAttribute("name", "election_name")
     pollTitleInput.setAttribute("id", "election_name")
 
-    // Poll Description
-    let pollDescriptionDiv = document.createElement("div")
-    formContainer.appendChild(pollDescriptionDiv)
-    let pollDescriptionLabel = document.createElement("label")
-    pollDescriptionDiv.appendChild(pollDescriptionLabel)
-    pollDescriptionLabel.appendChild(document.createTextNode("Election Description:"))
-    pollDescriptionLabel.setAttribute("for", "election_description")
-    let pollDescriptionInput = document.createElement("textarea")
-    pollDescriptionDiv.appendChild(pollDescriptionInput)
-    pollDescriptionInput.setAttribute("name", "election_description")
-    pollDescriptionInput.setAttribute("id", "election_description")
-
     // Number of winners
     let winnerCountDiv = document.createElement("div")
     formContainer.appendChild(winnerCountDiv)
+    winnerCountDiv.classList.add("form-row-double")
     let winnerCountLabel = document.createElement("label")
     winnerCountDiv.appendChild(winnerCountLabel)
     winnerCountLabel.appendChild(document.createTextNode("Number of winners:"))
@@ -276,6 +266,7 @@ function createNewPoll() {
     // Minimum required preferences
     let minimumPrefDiv = document.createElement("div")
     formContainer.appendChild(minimumPrefDiv)
+    minimumPrefDiv.classList.add("form-row-double")
     let minimumPrefLabel = document.createElement("label")
     minimumPrefDiv.appendChild(minimumPrefLabel)
     minimumPrefLabel.appendChild(document.createTextNode("Minimum preferences for each vote:\n(leave at 0 for all required)"))
@@ -294,6 +285,7 @@ function createNewPoll() {
     // Randomise Order before submission
     let randomiseBeforeDiv = document.createElement("div")
     formContainer.appendChild(randomiseBeforeDiv)
+    randomiseBeforeDiv.classList.add("form-row-double")
     let randomiseBeforeLabel = document.createElement("label")
     randomiseBeforeDiv.appendChild(randomiseBeforeLabel)
     randomiseBeforeLabel.appendChild(document.createTextNode("Shuffle order of Candidates before submission:"))
@@ -307,6 +299,7 @@ function createNewPoll() {
     // Randomise Order after submission
     let randomiseAfterDiv = document.createElement("div")
     formContainer.appendChild(randomiseAfterDiv)
+    randomiseAfterDiv.classList.add("form-row-double")
     let randomiseAfterLabel = document.createElement("label")
     randomiseAfterDiv.appendChild(randomiseAfterLabel)
     randomiseAfterLabel.appendChild(document.createTextNode("Shuffle order of Candidates displayed to each voter:"))
@@ -317,8 +310,98 @@ function createNewPoll() {
     randomiseAfterInput.setAttribute("name", "randomise_order")
     randomiseAfterInput.setAttribute("id", "randomise_order")
 
+    // Container for all candidate info
+    let candidatesContainer = document.createElement("div")
+    formContainer.appendChild(candidatesContainer)
+    candidatesContainer.id = "candidatesContainer"
 
-    display.replaceChildren(title, formContainer)
+    // Button to add additional candidates
+    let addCandidateButton = document.createElement("button")
+    formContainer.appendChild(addCandidateButton)
+    addCandidateButton.classList.add("little")
+    addCandidateButton.appendChild(document.createTextNode("+"))
+    addCandidateButton.setAttribute("onclick", "addCandidateToPoll()")
+    addCandidateButton.setAttribute("type", "button")
+
+    // Line break
+    formContainer.appendChild(document.createElement("hr"))
+
+    // Submit Button
+    let submitButton = document.createElement("button")
+    formContainer.appendChild(submitButton)
+    submitButton.appendChild(document.createTextNode("Submit"))
+    submitButton.setAttribute("onclick", "submitPoll()")
+    submitButton.setAttribute("type", "button")
+    submitButton.setAttribute("style", "margin: 0")
+
+    // Create a back button to get back to the poll list
+    let back = document.createElement("p")
+    back.classList.add("clickable")
+    let backBold = document.createElement("b")
+    back.appendChild(backBold)
+    backBold.appendChild(document.createTextNode("Back"))
+    back.setAttribute("onclick", "displayCurrentPolls()")
+
+    display.replaceChildren(title, formContainer, back)
+
+    // Create an initial candidate
+    addCandidateToPoll()
+
+}
+
+function addCandidateToPoll() {
+    let candidateList = document.getElementById("candidatesContainer")
+    let candidateId = candidateList.childElementCount
+    
+    let candidateContainer = document.createElement("div")
+    candidateContainer.id = `candidate-${candidateId}`
+    candidateContainer.classList.add("candidate")
+
+    
+    // Candidate Name
+    let candidateNameDiv = document.createElement("div")
+    candidateContainer.appendChild(candidateNameDiv)
+    candidateNameDiv.classList.add("form-row-triple")
+    let candidateNameLabel = document.createElement("label")
+    candidateNameDiv.appendChild(candidateNameLabel)
+    candidateNameLabel.appendChild(document.createTextNode("Candidate Name:"))
+    let formId = `candidate-name-${candidateId}`
+    candidateNameLabel.setAttribute("for", formId)
+    let candidateNameInput = document.createElement("input")
+    candidateNameDiv.appendChild(candidateNameInput)
+    candidateNameInput.setAttribute("type", "text")
+    candidateNameInput.setAttribute("required", true)
+    candidateNameInput.setAttribute("name", formId)
+    candidateNameInput.setAttribute("id", formId)
+    // Also have a remove button next to candidate name
+    let removeCandidateButton = document.createElement("button")
+    candidateNameDiv.appendChild(removeCandidateButton)
+    removeCandidateButton.appendChild(document.createTextNode("X"))
+    removeCandidateButton.classList.add("little")
+    removeCandidateButton.onclick = () => {
+        candidateContainer.remove()
+    }
+    
+    // Poll Description
+    let candidateDescriptionDiv = document.createElement("div")
+    candidateContainer.appendChild(candidateDescriptionDiv)
+    candidateDescriptionDiv.classList.add("form-row-double")
+    let candidateDescriptionLabel = document.createElement("label")
+    candidateDescriptionDiv.appendChild(candidateDescriptionLabel)
+    candidateDescriptionLabel.appendChild(document.createTextNode("Candidate Description:"))
+    formId = `candidate-description-${candidateId}`
+    candidateDescriptionLabel.setAttribute("for", formId)
+    let candidateDescriptionInput = document.createElement("textarea")
+    candidateDescriptionDiv.appendChild(candidateDescriptionInput)
+    candidateDescriptionInput.setAttribute("name", formId)
+    candidateDescriptionInput.setAttribute("id", formId)
+
+    // Add the two items to the list
+    candidateList.appendChild(candidateContainer)
+}
+
+function submitPoll() {
+    alert("TODO")
 }
 
 function handleError(errorResponse) {

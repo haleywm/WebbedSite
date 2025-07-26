@@ -1,4 +1,7 @@
---- --- @use 'sass:color';
+---
+---
+
+@use 'sass:color';
 $background: #ff7f50;
 
 .clickable {
@@ -21,6 +24,15 @@ button {
     box-shadow:
         inset -2px -3px 5px rgba(0, 0, 0, 0.5),
         inset 5px 5px 4px rgba(255, 255, 255, 0.8);
+    align-self: stretch;
+}
+
+button.little {
+    // Just be a lil guy
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+    min-width: 24px;
 }
 
 button:hover {
@@ -35,13 +47,24 @@ button:active {
     padding: 0.9em 2.1em 1.1em 1.9em;
 }
 
-.formContainer {
-    div {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        margin-bottom: 0.2em;
-    }
+button.little:active {
+    // Just be a lil guy
+    padding: 0;
+}
 
+
+.form-row-double {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin-bottom: 0.2em;
+}
+
+.form-row-triple {
+    @extend .form-row-double;
+    grid-template-columns: 40% 55% 5%;
+}
+
+.formContainer {
     textarea {
         resize: vertical;
     }
@@ -54,8 +77,18 @@ button:active {
         height: 1.5em;
     }
 
+    input, textarea {
+        font-size: 1em;
+    }
+
     input[type="checkbox"] {
         width: 1.5em;
         margin-left: 0;
+    
     }
+}
+
+.candidate {
+    border-top: 2px dotted gray;
+    padding-top: 4px;
 }
