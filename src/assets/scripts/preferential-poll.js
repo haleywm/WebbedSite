@@ -352,12 +352,12 @@ function createNewPoll() {
 function addCandidateToPoll() {
     let candidateList = document.getElementById("candidatesContainer")
     let candidateId = candidateList.childElementCount
-    
+
     let candidateContainer = document.createElement("div")
     candidateContainer.id = `candidate-${candidateId}`
     candidateContainer.classList.add("candidate")
 
-    
+
     // Candidate Name
     let candidateNameDiv = document.createElement("div")
     candidateContainer.appendChild(candidateNameDiv)
@@ -381,7 +381,7 @@ function addCandidateToPoll() {
     removeCandidateButton.onclick = () => {
         candidateContainer.remove()
     }
-    
+
     // Poll Description
     let candidateDescriptionDiv = document.createElement("div")
     candidateContainer.appendChild(candidateDescriptionDiv)
@@ -401,12 +401,107 @@ function addCandidateToPoll() {
 }
 
 function submitPoll() {
-    alert("TODO")
+    // Gathering data for poll
+    let formIds = ["election_name", "minimum_preferences", "winner_amount", "randomise_before", "randomise_order"]
+    // Checking validity
+    let all_valid = true
+    // Going through all main form elements
+    for (let id of formIds) {
+        if (!document.getElementById(id).reportValidity()) {
+            // Invalid contents, this should popup with error
+            all_valid = false
+        }
+    }
+    // Going through however many candidate names are in the candidate list
+    // Candidate descriptions can be empty so that's fine
+    let candidateList = document.getElementById("candidatesContainer")
+    for (let candidate of candidateList.getElementsByTagName("input")) {
+        if (!candidate.reportValidity()) {
+            all_valid = false
+        }
+    }
+    if (!all_valid) {
+        // Wait for user to fix errors
+        return
+    }
+
+    // Gathering data to object
+    let pollData = {
+        "election_name": document.getElementById("election_name").value,
+        "minimum_preferences": parseInt(document.getElementById("minimum_preferences").value),
+        "winner_amount": parseInt(document.getElementById("winner_amount").value),
+        "candidate_names": [],
+        "candidate_descriptions": [],
+        "randomise_order": document.getElementById("randomise_order").checked
+    }
+    // Checking side value
+    let randomiseBefore = document.getElementById("randomise_before").checked
+    // Getting candidate deets
+    let candidateChildren = Array.from(candidateList.children)
+    // Shuffling if requested
+    if (randomiseBefore) {
+        shuffle(candidateChildren)
+    }
+    // Going through the list, either in order or shuffled,
+    // And for each entry grabbing the name and description and adding it to the end of the list
+    for (let candidate of candidateChildren) {
+        let name = candidate.getElementsByTagName("input")[0].value
+        let description = candidate.getElementsByTagName("textarea")[0].value
+        pollData["candidate_names"].push(name)
+        pollData["candidate_descriptions"].push(description)
+    }
+
+    // Lastly, submitting the created JSON
+    let url = API_ENDPOINT + "/submit_poll"
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(pollData)
+    })
+        .then((response) => {
+            if (response.status != 200) {
+                // Server didn't accept submission, tell the user
+                // Text isn't available yet, wait for the text
+                response.text()
+                    .then((text) => {
+                        alert(`Error ${response.status} submitting poll: ${text}`)
+                    })
+            }
+            // Response code was 200 so let's act on the json which will have new poll id
+            return response.json()
+        })
+        .then((response) => {
+            // Response was successful and json has been decoded
+            let pollId = response["election_id"]
+            console.log(`Successfully created poll ${pollId}!`)
+            displayPoll(pollId)
+        })
 }
 
 function handleError(errorResponse) {
     // For now just log the error message
     console.log("Error from endpoint:" + errorResponse)
+}
+
+
+// This function is taken from https://stackoverflow.com/a/2450976
+// Thanks to coolaj86
+function shuffle(array) {
+    let currentIndex = array.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
 }
 
 displayCurrentPolls()
