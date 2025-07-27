@@ -199,8 +199,17 @@ function displayResults(pollData) {
             }, 0)
             for (let i = 0; i < pollResults.first_preferences.length; i++) {
                 let partyEntry = document.createElement("li")
+                // If there are votes, give a percentage
+                // If there are no votes, just give N/A%
+                let votePercentage
+                if (totalVotes != 0) {
+                    votePercentage = (pollResults.first_preferences[i] / totalVotes * 100).toFixed(2)
+                }
+                else {
+                    votePercentage = "N/A"
+                }
                 partyEntry.appendChild(document.createTextNode(
-                    `${pollData.candidate_names[i]}: ${pollResults.first_preferences[i]} Votes (${(pollResults.first_preferences[i] / totalVotes * 100).toFixed(2)}%)`
+                    `${pollData.candidate_names[i]}: ${pollResults.first_preferences[i]} Votes (${votePercentage}%)`
                 ))
                 partyList.appendChild(partyEntry)
             }
