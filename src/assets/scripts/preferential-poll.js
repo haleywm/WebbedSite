@@ -141,6 +141,7 @@ function displayVoteMenu(pollData) {
         let box = document.createElement("li")
         box.appendChild(document.createTextNode(candidate))
         uncastVotes.appendChild(box)
+        box.onclick = () => { swapItem(box) }
     }
 
     // Adding vote button
@@ -178,8 +179,13 @@ function submitVote(pollData) {
     let userVotes = []
 
     // Checking for errors
-    if (pollData.minimum_preferences > 0 && pollData.minimum_preferences > voteOrder.children.length) {
+    if (pollData.minimum_preferences > voteOrder.children.length) {
         alert(`At least ${pollData.minimum_preferences} votes required!`)
+        return
+    }
+    if (pollData.minimum_preferences <= 0 && voteOrder.children.length != pollData.candidate_names.length) {
+        alert(`Exactly ${pollData.candidate_names.length} names required!`)
+        return
     }
 
     // Iterate through each vote in the list in order
@@ -607,6 +613,22 @@ function submitPoll() {
 function handleError(errorResponse) {
     // For now just log the error message
     console.log("Error from endpoint:" + errorResponse)
+}
+
+function swapItem(box) {
+    // Swaps an li item between the two lists
+    // Figure out where the box needs to go based on it's current parent
+    let targetParentId
+    if (box.parentElement.id == "uncastVotes") {
+        targetParentId = "voteOrder"
+    }
+    else {
+        targetParentId = "uncastVotes"
+    }
+
+    // Move it
+    // This automatically removes box from the old parent
+    document.getElementById(targetParentId).appendChild(box)
 }
 
 
