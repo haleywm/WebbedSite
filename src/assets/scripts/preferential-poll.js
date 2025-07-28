@@ -102,7 +102,116 @@ function displayPoll(pollId) {
 }
 
 function displayVoteMenu(pollData) {
-    alert("TODO")
+    // Display a menu to allow choosing who to vote for
+    let display = document.getElementById("poll-container")
+    let title = document.createElement("h2")
+    title.appendChild(document.createTextNode(`Casting vote in ${pollData.election_name}`))
+    // Create voteContainer, which will display two lists
+    // voteOrder, which contains the users votes in order
+    // And uncastVotes, which contains everyone who isn't being ranked
+    // uncastVotes starts off full of votes
+    // and voteOrder starts empty
+    let voteContainer = document.createElement("div")
+    voteContainer.classList.add("voteContainer")
+    // Giving voteContainer a fixed height so it doesn't shrink
+    voteContainer.setAttribute("style", `height: calc((1.9em + 2px) * ${pollData.candidate_names.length} + 4em)`)
+    let voteOrder = document.createElement("ol")
+    voteContainer.appendChild(voteOrder)
+    voteOrder.id = "voteOrder"
+    let uncastVotes = document.createElement("ol")
+    voteContainer.appendChild(uncastVotes)
+    uncastVotes.id = "uncastVotes"
+
+    // Now, fill uncastVotes with options
+    let candidateList = pollData.candidate_names
+    if (pollData.randomise_order) {
+        // Randomise candidates order if needed
+        // By copying it to a new list
+        // And shuffling that list
+        candidateList = Array.from(candidateList)
+        shuffle(candidateList)
+    }
+    for (let candidate of candidateList) {
+        let box = document.createElement("li")
+        box.appendChild(document.createTextNode(candidate))
+        uncastVotes.appendChild(box)
+    }
+
+    // Adding vote button
+    let voteButton = document.createElement("button")
+    voteButton.appendChild(document.createTextNode("Submit Vote"))
+    voteButton.onclick = () => { submitVote(pollData) }
+
+    // Create a back button to get back to the poll info
+    let back = document.createElement("p")
+    back.classList.add("clickable")
+    let backBold = document.createElement("b")
+    back.appendChild(backBold)
+    backBold.appendChild(document.createTextNode("Back"))
+    back.onclick = () => { displayPoll(pollData.election_id) }
+
+    // Adding everything to the page
+    display.replaceChildren(title, voteContainer, voteButton, back)
+
+    // And establishing SortableJS last
+    // In case it doesn't like being initiated on something that doesn't exist yet
+    new Sortable(voteOrder, {
+        group: "shared",
+        animation: 150
+    })
+
+    new Sortable(uncastVotes, {
+        group: "shared",
+        animation: 150
+    })
+}
+
+function submitVote(pollData) {
+    // Gather up the vote order, and then submit it
+    let voteOrder = document.getElementById("voteOrder")
+    let userVotes = []
+
+    // Checking for errors
+    if (pollData.minimum_preferences > 0 && pollData.minimum_preferences > voteOrder.children.length) {
+        alert(`At least ${pollData.minimum_preferences} votes required!`)
+    }
+
+    // Iterate through each vote in the list in order
+    // And add the votes relevant index to userVotes
+    for (let voteItem of voteOrder.children) {
+        let name = voteItem.textContent
+        // The text content of every item should match a candidate name perfectly
+        userVotes.push(pollData.candidate_names.indexOf(name))
+    }
+
+    // Submitting vote
+    let url = API_ENDPOINT + "/submit_vote"
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "election_id": pollData.election_id,
+            "preferences": userVotes
+        })
+    })
+        .then((response) => {
+            if (response.status != 200) {
+                // Server didn't accept submission, tell the user
+                // Text isn't available yet, wait for the text
+                response.text()
+                    .then((text) => {
+                        alert(`Error ${response.status} submitting poll: ${text}`)
+                    })
+            }
+            else {
+                // The response text will just be "OK" so we're good to go!
+                // Return to looking at election
+                console.log("Successfully submitted vote!")
+                displayPoll(pollData.election_id)
+            }
+        })
 }
 
 function displayResults(pollData) {
@@ -214,13 +323,13 @@ function displayResults(pollData) {
                 partyList.appendChild(partyEntry)
             }
 
-            // Create a back button to get back to the poll list
+            // Create a back button to get back to the poll info
             let back = document.createElement("p")
             back.classList.add("clickable")
             let backBold = document.createElement("b")
             back.appendChild(backBold)
             backBold.appendChild(document.createTextNode("Back"))
-            back.setAttribute("onclick", "displayCurrentPolls()")
+            back.onclick = () => { displayPoll(pollData.election_id) }
             children.push(back)
 
             // Display results

@@ -92,3 +92,29 @@ button.little:active {
     border-top: 2px dotted gray;
     padding-top: 4px;
 }
+
+.voteContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+.voteContainer>ol {
+    border: 1px solid black;
+    flex: 1 1 0;
+    padding: 1em 0;
+    margin-bottom: 1em;
+}
+
+.voteContainer li {
+    background-color: white;
+    width: auto;
+    padding: 0.2em 0.4em;
+    border: 1px dashed grey;
+    margin: 0 0.4em;
+    list-style-position: inside;
+}
+
+#uncastVotes>li {
+    list-style-type: none;
+}
