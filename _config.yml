@@ -12,3 +12,5 @@ defaults:
 collections:
   rambles:
     output: true
+  tools:
+    output: true

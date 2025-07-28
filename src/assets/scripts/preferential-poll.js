@@ -6,6 +6,12 @@ function displayCurrentPolls() {
     fetch(url)
         .then((response) => {
             return response.json()
+        }, (error) => {
+            // Unable to get the request, just display a "Server Error" message to user
+            let display = document.getElementById("poll-container")
+            let info = document.createElement("p")
+            info.appendChild(document.createTextNode("Oopsie woopsie! Unable to contact the poll server."))
+            display.replaceChildren(info)
         })
         .then((pollList) => {
             // Get the container
