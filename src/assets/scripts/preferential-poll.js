@@ -82,20 +82,25 @@ function displayPoll(pollId) {
             }
 
             // Create buttons to Vote, View Results, or View all Votes
+            // Button container
+            let buttonRow = document.createElement("div")
+            buttonRow.classList.add("row")
+            children.push(buttonRow)
+
             let voteButton = document.createElement("button")
             voteButton.appendChild(document.createTextNode("Vote"))
             voteButton.onclick = () => { displayVoteMenu(pollData) }
-            children.push(voteButton)
+            buttonRow.appendChild(voteButton)
 
             let resultsButton = document.createElement("button")
             resultsButton.appendChild(document.createTextNode("View Results"))
             resultsButton.onclick = () => { displayResults(pollData) }
-            children.push(resultsButton)
+            buttonRow.appendChild(resultsButton)
 
             let allVotesButton = document.createElement("button")
             allVotesButton.appendChild(document.createTextNode("View All Votes"))
             allVotesButton.onclick = () => { viewAllVotes(pollData) }
-            children.push(allVotesButton)
+            buttonRow.appendChild(allVotesButton)
 
             // Create a back button to get back to the poll list
             let back = document.createElement("p")
@@ -123,13 +128,23 @@ function displayVoteMenu(pollData) {
     // and voteOrder starts empty
     let voteContainer = document.createElement("div")
     voteContainer.classList.add("voteContainer")
-    // Giving voteContainer a fixed height so it doesn't shrink
-    voteContainer.setAttribute("style", `height: calc((1.9em + 2px) * ${pollData.candidate_names.length} + 4em)`)
+    let voteOrderContainer = document.createElement("div")
+    voteContainer.appendChild(voteOrderContainer)
+    voteOrderContainer.classList.add("light")
+    let voteOrderTitle = document.createElement("h3")
+    voteOrderContainer.appendChild(voteOrderTitle)
+    voteOrderTitle.appendChild(document.createTextNode("Cast Votes:"))
     let voteOrder = document.createElement("ol")
-    voteContainer.appendChild(voteOrder)
+    voteOrderContainer.appendChild(voteOrder)
     voteOrder.id = "voteOrder"
+    let uncastVotesContainer = document.createElement("div")
+    voteContainer.appendChild(uncastVotesContainer)
+    uncastVotesContainer.classList.add("dark")
+    let uncastVotesTitle = document.createElement("h3")
+    uncastVotesContainer.appendChild(uncastVotesTitle)
+    uncastVotesTitle.appendChild(document.createTextNode("Uncast Votes:"))
     let uncastVotes = document.createElement("ol")
-    voteContainer.appendChild(uncastVotes)
+    uncastVotesContainer.appendChild(uncastVotes)
     uncastVotes.id = "uncastVotes"
 
     // Now, fill uncastVotes with options
@@ -164,7 +179,7 @@ function displayVoteMenu(pollData) {
     // Adding everything to the page
     display.replaceChildren(title, voteContainer, voteButton, back)
 
-    // And establishing SortableJS last
+    // And establishing SortableJS after creation
     // In case it doesn't like being initiated on something that doesn't exist yet
     new Sortable(voteOrder, {
         group: "shared",
@@ -175,6 +190,13 @@ function displayVoteMenu(pollData) {
         group: "shared",
         animation: 150
     })
+
+    // Setting the height of the container as fixed
+    // So that it doesn't shrink as votes are moved
+    // Will look funny if page is resized but I'm not sure how to fix that
+    let currentHeight = voteContainer.offsetHeight
+    // Giving voteContainer a fixed height so it doesn't shrink
+    voteContainer.setAttribute("style", `height: ${currentHeight}px`)
 }
 
 function submitVote(pollData) {
@@ -527,7 +549,6 @@ function createNewPoll() {
     submitButton.appendChild(document.createTextNode("Submit"))
     submitButton.setAttribute("onclick", "submitPoll()")
     submitButton.setAttribute("type", "button")
-    submitButton.setAttribute("style", "margin: 0")
 
     // Create a back button to get back to the poll list
     let back = document.createElement("p")
