@@ -81,7 +81,7 @@ function displayPoll(pollId) {
                 children.push(descHtml)
             }
 
-            // Create buttons to Vote or to View Results
+            // Create buttons to Vote, View Results, or View all Votes
             let voteButton = document.createElement("button")
             voteButton.appendChild(document.createTextNode("Vote"))
             voteButton.onclick = () => { displayVoteMenu(pollData) }
@@ -91,6 +91,11 @@ function displayPoll(pollId) {
             resultsButton.appendChild(document.createTextNode("View Results"))
             resultsButton.onclick = () => { displayResults(pollData) }
             children.push(resultsButton)
+
+            let allVotesButton = document.createElement("button")
+            allVotesButton.appendChild(document.createTextNode("View All Votes"))
+            allVotesButton.onclick = () => { viewAllVotes(pollData) }
+            children.push(allVotesButton)
 
             // Create a back button to get back to the poll list
             let back = document.createElement("p")
@@ -104,7 +109,6 @@ function displayPoll(pollId) {
             // Use apply to provide every item in children as an argument to replaceChildren
             display.replaceChildren(...children)
         })
-
 }
 
 function displayVoteMenu(pollData) {
@@ -346,6 +350,67 @@ function displayResults(pollData) {
 
             // Display results
             display.replaceChildren(...children)
+        })
+}
+
+function viewAllVotes(pollData) {
+    // Views all votes for a given poll
+    // First, fetch the raw CSV file
+    let url = API_ENDPOINT + "/download_all_votes"
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ election_id: pollData.election_id })
+    })
+        .then((response) => {
+            if (response.status != 200) {
+                response.text()
+                    .then(handleError)
+            }
+            return response.text()
+        })
+        .then((response) => {
+            // Before parsing text, first prepare DOM
+            let display = document.getElementById("poll-container")
+            let title = document.createElement("h2")
+            title.appendChild(document.createTextNode(`All Votes: ${pollData.election_name}`))
+            let disclaimer = document.createElement("p")
+            disclaimer.appendChild(document.createTextNode("Please note that this is primarily for testing or educational purposes. Reading raw votes can be difficult to parse, and votes are anonymized with no further information collected."))
+            let voteContainer = document.createElement("div")
+
+            // Now parse the data
+            // Response is CSV encoded vote indexes
+            // Parse that:
+            const lines = response.split("\n")
+            for (let line of lines) {
+                // Ignore empty lines
+                if (line.length > 0) {
+                    // Separate votes with a line
+                    voteContainer.appendChild(document.createElement("hr"))
+                    let voteList = document.createElement("ol")
+                    voteContainer.appendChild(voteList)
+                    const indexes = line.split(",")
+                    for (strIndex of indexes) {
+                        let vote = document.createElement("li")
+                        voteList.appendChild(vote)
+                        vote.appendChild(document.createTextNode(
+                            pollData.candidate_names[parseInt(strIndex)]
+                        ))
+                    }
+                }
+            }
+
+            // Add a back button
+            let back = document.createElement("p")
+            back.classList.add("clickable")
+            let backBold = document.createElement("b")
+            back.appendChild(backBold)
+            backBold.appendChild(document.createTextNode("Back"))
+            back.onclick = () => { displayPoll(pollData.election_id) }
+
+            display.replaceChildren(title, disclaimer, voteContainer, back)
         })
 }
 
