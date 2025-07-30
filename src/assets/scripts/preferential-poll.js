@@ -160,8 +160,34 @@ function displayVoteMenu(pollData) {
     for (let candidate of candidateList) {
         let box = document.createElement("li")
         box.appendChild(document.createTextNode(candidate))
-        uncastVotes.appendChild(box)
+        // For accessibility, adding button characteristics to this li
+        // (Would use a real button but that doesn't play nice style wise)
+        box.setAttribute("role", "button")
+        box.setAttribute("tabindex", 0)
         box.onclick = () => { swapItem(box) }
+        box.addEventListener("keydown", (e) => {
+            // Verify if keypress was enter or space
+            if (e.key == "Enter" || e.key == " ") {
+                // Trigger onclick event
+                e.currentTarget.onclick()
+            }
+            // Allow using up and down to juggle items within list
+            else if (e.key == "ArrowUp") {
+                if (e.currentTarget.previousElementSibling !== null) {
+                    e.currentTarget.parentElement.insertBefore(e.currentTarget, e.currentTarget.previousElementSibling)
+                    e.preventDefault()
+                    e.currentTarget.focus()
+                }
+            }
+            else if (e.key == "ArrowDown") {
+                if (e.currentTarget.nextElementSibling !== null) {
+                    e.currentTarget.parentElement.insertBefore(e.currentTarget, e.currentTarget.nextElementSibling.nextElementSibling)
+                    e.preventDefault()
+                    e.currentTarget.focus()
+                }
+            }
+        })
+        uncastVotes.appendChild(box)
     }
 
     // Adding vote button
@@ -717,6 +743,7 @@ function swapItem(box) {
     // Move it
     // This automatically removes box from the old parent
     document.getElementById(targetParentId).appendChild(box)
+    box.focus()
 }
 
 
