@@ -224,7 +224,7 @@ function displayVoteMenu(pollData) {
     // Will look funny if page is resized but I'm not sure how to fix that
     let currentHeight = voteContainer.offsetHeight
     // Giving voteContainer a fixed height so it doesn't shrink
-    voteContainer.setAttribute("style", `height: ${currentHeight}px`)
+    voteContainer.setAttribute("style", `min-height: ${currentHeight}px`)
 }
 
 function submitVote(pollData) {
