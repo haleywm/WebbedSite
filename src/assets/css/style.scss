@@ -1,6 +1,5 @@
 ---
 ---
-
 @use 'sass:color';
 
 $font-stack: Verdana, sans-serif;
@@ -163,5 +162,17 @@ li {
     img {
         width: calc(100% / 3 - $pad-amount * 2/3);
         margin: 0;
+    }
+}
+
+/* Reponsive design to make things look better on mobile */
+@media screen and (max-width: 600px) {
+    .body {
+        flex-flow: row wrap;
+
+        .leftbar,
+        .main {
+            width: 100%;
+        }
     }
 }

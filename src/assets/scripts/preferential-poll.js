@@ -26,9 +26,10 @@ function displayCurrentPolls() {
             let pollListHTML = document.createElement("ul")
             for (const pollItem of pollList) {
                 let htmlItem = document.createElement("li")
-                htmlItem.classList.add("clickable")
-                let text = document.createTextNode(pollItem.election_name)
-                htmlItem.appendChild(text)
+                let button = document.createElement("button")
+                button.classList.add("textbutton")
+                button.appendChild(document.createTextNode(pollItem.election_name))
+                htmlItem.appendChild(button)
                 htmlItem.setAttribute("onclick", `displayPoll(${pollItem.election_id})`)
                 pollListHTML.appendChild(htmlItem)
             }
@@ -103,12 +104,13 @@ function displayPoll(pollId) {
             buttonRow.appendChild(allVotesButton)
 
             // Create a back button to get back to the poll list
-            let back = document.createElement("p")
-            back.classList.add("clickable")
+            let back = document.createElement("button")
+            back.classList.add("textbutton")
             let backBold = document.createElement("b")
             back.appendChild(backBold)
             backBold.appendChild(document.createTextNode("Back"))
             back.setAttribute("onclick", "displayCurrentPolls()")
+            back.setAttribute("tabindex", 0)
             children.push(back)
 
             // Use apply to provide every item in children as an argument to replaceChildren
@@ -169,12 +171,14 @@ function displayVoteMenu(pollData) {
     voteButton.onclick = () => { submitVote(pollData) }
 
     // Create a back button to get back to the poll info
-    let back = document.createElement("p")
-    back.classList.add("clickable")
+    let back = document.createElement("button")
+    back.classList.add("textbutton")
     let backBold = document.createElement("b")
     back.appendChild(backBold)
     backBold.appendChild(document.createTextNode("Back"))
     back.onclick = () => { displayPoll(pollData.election_id) }
+    back.setAttribute("tabindex", 0)
+
 
     // Adding everything to the page
     display.replaceChildren(title, voteContainer, voteButton, back)
@@ -362,12 +366,13 @@ function displayResults(pollData) {
             }
 
             // Create a back button to get back to the poll info
-            let back = document.createElement("p")
-            back.classList.add("clickable")
+            let back = document.createElement("button")
+            back.classList.add("textbutton")
             let backBold = document.createElement("b")
             back.appendChild(backBold)
             backBold.appendChild(document.createTextNode("Back"))
             back.onclick = () => { displayPoll(pollData.election_id) }
+            back.setAttribute("tabindex", 0)
             children.push(back)
 
             // Display results
@@ -425,12 +430,13 @@ function viewAllVotes(pollData) {
             }
 
             // Add a back button
-            let back = document.createElement("p")
-            back.classList.add("clickable")
+            let back = document.createElement("button")
+            back.classList.add("textbutton")
             let backBold = document.createElement("b")
             back.appendChild(backBold)
             backBold.appendChild(document.createTextNode("Back"))
             back.onclick = () => { displayPoll(pollData.election_id) }
+            back.setAttribute("tabindex", 0)
 
             display.replaceChildren(title, disclaimer, voteContainer, back)
         })
@@ -551,12 +557,13 @@ function createNewPoll() {
     submitButton.setAttribute("type", "button")
 
     // Create a back button to get back to the poll list
-    let back = document.createElement("p")
-    back.classList.add("clickable")
+    let back = document.createElement("button")
+    back.classList.add("textbutton")
     let backBold = document.createElement("b")
     back.appendChild(backBold)
     backBold.appendChild(document.createTextNode("Back"))
     back.setAttribute("onclick", "displayCurrentPolls()")
+    back.setAttribute("tabindex", 0)
 
     display.replaceChildren(title, formContainer, back)
 
