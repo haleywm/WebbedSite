@@ -110,7 +110,6 @@ function displayPoll(pollId) {
             back.appendChild(backBold)
             backBold.appendChild(document.createTextNode("Back"))
             back.setAttribute("onclick", "displayCurrentPolls()")
-            back.setAttribute("tabindex", 0)
             children.push(back)
 
             // Use apply to provide every item in children as an argument to replaceChildren
@@ -177,7 +176,6 @@ function displayVoteMenu(pollData) {
     back.appendChild(backBold)
     backBold.appendChild(document.createTextNode("Back"))
     back.onclick = () => { displayPoll(pollData.election_id) }
-    back.setAttribute("tabindex", 0)
 
 
     // Adding everything to the page
@@ -372,7 +370,6 @@ function displayResults(pollData) {
             back.appendChild(backBold)
             backBold.appendChild(document.createTextNode("Back"))
             back.onclick = () => { displayPoll(pollData.election_id) }
-            back.setAttribute("tabindex", 0)
             children.push(back)
 
             // Display results
@@ -436,7 +433,6 @@ function viewAllVotes(pollData) {
             back.appendChild(backBold)
             backBold.appendChild(document.createTextNode("Back"))
             back.onclick = () => { displayPoll(pollData.election_id) }
-            back.setAttribute("tabindex", 0)
 
             display.replaceChildren(title, disclaimer, voteContainer, back)
         })
@@ -563,7 +559,6 @@ function createNewPoll() {
     back.appendChild(backBold)
     backBold.appendChild(document.createTextNode("Back"))
     back.setAttribute("onclick", "displayCurrentPolls()")
-    back.setAttribute("tabindex", 0)
 
     display.replaceChildren(title, formContainer, back)
 
