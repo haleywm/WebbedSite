@@ -15,7 +15,6 @@ A thing where I try to add 1 thing a day to a website to try to slowly make some
     - Maybe try to make tetris again, or my very own take on a minesweeper clone
     - See if I find creativity to do more
 - Add a "links" section with my own little 88x31 sticker, and links to some handy resources or websites that I love.
-- Clean up the "About Me" section in case it's too embarrassing to show to cis people I know
 
 Rambles I want to make:
 
@@ -27,3 +26,4 @@ Rambles I want to make:
 - My experience caring for a snake
 - Living with chronic illness
 - Why I strongly dislike pseudoscience
+- Tour through Shesha's enclosure

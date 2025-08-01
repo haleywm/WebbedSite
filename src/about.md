@@ -12,7 +12,8 @@ Hi! I'm Haley! I'm a chronic sleepyhead from Australia. I'm not much of an artis
 - Queer.
 - I have a degree in Cybersecurity but I don't really do much of that anymore.
 - I have a lovely pet Stimsons Python called Shesha 🐍!
-- I've lived for most of my life in Australia, but I was actually born in Scotland and moved here as a young child.
 - I have a hobby of home-labbing and self hosting which led to me making this website as an extension of that. I like doing things on my own hardware with my own work, so I don't have to worry about things disappearing because some company changed their plans.
 - I work part time fixing up computers for a school.
 - I've also been getting into learning electronics repair as a hobby! I'm avoiding anything remotely high-voltage but it's been fun fiddling with stuff so that I can learn to repair my own stuff when needed, and also learn more about what makes things around me tick.
+- I love reading about engineering stuff, even if I'm not smart enough to actually know what really makes it all tick. Even not being an expert it's fun learning about how stuff like dams or train lines or generators work.
+- Some of my favourite games are Breath of the Wild, Stardew Valley, and Undertale.
