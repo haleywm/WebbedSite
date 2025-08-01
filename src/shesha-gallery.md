@@ -2,6 +2,8 @@
 title: "Shesha Pictures"
 description: "My collection of Shesha pictures!"
 ---
+<script src="/assets/scripts/gallery.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/css/gallery.css" />
 
 Shesha is my lovely pet Stimson's Python!
 

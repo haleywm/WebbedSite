@@ -1,0 +1,61 @@
+#galleryView {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#galleryView>.imgContainer {
+    order: 2;
+    height: calc(100% - 5vh);
+    flex: 0 1 80vw;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgContainer img {
+    max-height: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: default;
+}
+
+#galleryView>button {
+    font-size: 3em;
+    margin: 1vw;
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 0 0 10vw;
+    width: 10vw;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}
+
+#galleryView>#leftButton {
+    order: 1;
+}
+
+#galleryView>#rightButton {
+    order: 3;
+}
+
+#galleryView>#closeButton {
+    position: fixed;
+    top: 1vw;
+    right: 1vw;
+    font-size: 3em;
+}
+
+img {
+    cursor: pointer;
+}
