@@ -15,13 +15,15 @@ Fun Shesha facts:
 - Her hobbies include long naps, roaming her enclosure, staring at me all evening, and locating tight spaces.
 - As a python, she is totally non venomous! She has evolved to hunt pray through constriction with her powerful muscles. Due to her small size, she doesn't pose much of a threat to anyone though! Certified not really a danger-noodle unless you are a small mouse or rat.
 - Stimson's Pythons are a popular species of pet snake in Australia, as they're quite small, very docile, and can meet all of their nutritional needs with just mice and/or rats, which can be fairly easily bought frozen from farms.
+- Stimsons Pythons are a member of the [*Antaresia*](https://en.wikipedia.org/wiki/Antaresia) genus, who are notable for being the smallest family of pythons in the world!
+- Despite having evolved a shovel-shaped head to assist in digging, she's not terribly interested in tunnelling, but loves to climb and get a high up point of view to keep an eye on everything.
 
-**Current Shesha status:** Currently hibernating over winter in a small plastic hide, very far away from any of her heaters.
+**Current Shesha status:** On Wednesday morning I checked on her and found that she had moved from her cold hibernation spot to her warm-ish (kept at 26° during winter) cave! Hopefully this is a sign that she's going to start slowly waking up from hibernation soon, since she went in to hibernation about a month before winter started which seemed a bit enthusiastic to me.
 
 
 ## Pictures:
 
-(Todo: Add a proper full screen pop-up thing when you click on the pictures.)
+You can click on any of the pictures to see it bigger, and then use the left and right arrows (or the keys on your keyboard) to navigate between the different pictures. You can press the X in the corner (or press escape) to close the image view.
 
 
 <div class="image-gallery" markdown="1">
