@@ -165,6 +165,13 @@ li {
     }
 }
 
+/* Improve viewing of images inside text */
+:is(a,p)>img {
+    margin: 0;
+    position: relative;
+    top: 0.5em;
+}
+
 /* Reponsive design to make things look better on mobile */
 @media screen and (max-width: 600px) {
     .body {

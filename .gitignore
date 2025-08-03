@@ -1,4 +1,5 @@
 www/*
 /src/assets/gallery-images/*
+/src/assets/images/stickers/*
 src/_data/status.yml
 **.webp
