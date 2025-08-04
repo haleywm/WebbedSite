@@ -1,7 +1,13 @@
 ---
 title: "Command Line Tools"
 description: "Command line tools that I use, what I think looks good, and some fun tools you can use to make things look nice :)"
+sections:
+  - name: My current terminal setup
+  - name: Useful command line tools
+  - name: Fun command line tools
 ---
+
+{% include sections.html %}
 
 I often use the linux command line, it's a great tool for quickly messing around with files, and there's a lot of really handy tools that just have command line interfaces, because of how easy it is to make command line interfaces.
 

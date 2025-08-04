@@ -171,6 +171,17 @@ li {
     top: 0.5em;
 }
 
+/* Display page sections */
+.sections {
+    width: fit-content;
+    border: 1px solid $primary;
+    padding-right: 1em;
+    background-color: color.scale($text-background, $saturation: -50%);
+    h3 {
+        padding-left: 1em;
+    }
+}
+
 /* Reponsive design to make things look better on mobile */
 @media screen and (max-width: 600px) {
     .body {

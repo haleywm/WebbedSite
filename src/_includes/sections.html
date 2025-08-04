@@ -1,0 +1,18 @@
+{% comment %}
+Generate a list of sections to include at the front of an article.
+{% endcomment %}
+<div class="sections">
+    <h3>Quick Navigation:</h3>
+    <ul>
+        {% for section in page.sections %}
+        {% if section.link %}
+        {% assign section_id = section.link %}
+        {% else %}
+        {% assign section_id = section.name | slugify %}
+        {% endif %}
+        <li>
+            <a href="#{{section_id}}">{{section.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
