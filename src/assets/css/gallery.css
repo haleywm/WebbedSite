@@ -28,7 +28,7 @@
 }
 
 #galleryView>button {
-    font-size: 3em;
+    font-size: min(3em, 8vw);
     margin: 1vw;
     background: none;
     border: none;
@@ -39,6 +39,8 @@
     margin: 0;
     padding: 0;
     z-index: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 1vw;
 }
 
 #galleryView>#leftButton {
@@ -53,7 +55,6 @@
     position: fixed;
     top: 1vw;
     right: 1vw;
-    font-size: 3em;
 }
 
 img {

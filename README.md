@@ -15,6 +15,8 @@ A thing where I try to add 1 thing a day to a website to try to slowly make some
     - Maybe try to make tetris again, or my very own take on a minesweeper clone
     - See if I find creativity to do more
 - Add a "Visits" counter (Will require me to enable caddy metrics, and then either make it public (I would rather not), or configure it to only serve to local IPs, and then write a script which runs every minute which gets from the endpoint, filters to just the data that I care about (from https://caddyserver.com/docs/metrics I think this would involve `caddy_http_requests_total` and figure out the correct labels for the most accurate data. Script can then dump the data in a file available on the file server so that javascript can GET it)).
+- Use https://isso-comments.de/ to add a guest book on my homepage (this is standalone and doesn't require both an SQL server and a mail server, I can just check the application log instead).
+    - Maybe setup https://github.com/valeriansaliou/bandurria down the line if I ever set up my own web server.
 
 Rambles I want to make:
 
