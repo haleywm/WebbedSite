@@ -9,4 +9,9 @@
         {{ site.data.status.status | markdownify }}
         <p class="date">- {{ site.data.status.status_date | date: "%A, %e/%m/%y" }}</p>
     </div>
+    <div>
+        <p>Current Visitors: <code id="currentVisitors">Unknown</code></p>
+        <p>Total Visitors: <code id="totalVisitors">Unknown</code></p>
+    </div>
+    <script src="/assets/scripts/visitorcount.js"></script>
 </div>
