@@ -143,6 +143,9 @@ code {
 
 li {
     padding: 1px 0;
+    >p {
+        margin: 0;
+    }
 }
 
 .red {

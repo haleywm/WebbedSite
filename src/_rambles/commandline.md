@@ -1,6 +1,7 @@
 ---
 title: "Command Line Tools"
 description: "Command line tools that I use, what I think looks good, and some fun tools you can use to make things look nice :)"
+date: 2025-07-16
 sections:
   - name: My current terminal setup
   - name: Useful command line tools
