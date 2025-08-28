@@ -98,11 +98,6 @@ function displayPoll(pollId) {
             resultsButton.onclick = () => { displayResults(pollData) }
             buttonRow.appendChild(resultsButton)
 
-            let allVotesButton = document.createElement("button")
-            allVotesButton.appendChild(document.createTextNode("View All Votes"))
-            allVotesButton.onclick = () => { viewAllVotes(pollData) }
-            buttonRow.appendChild(allVotesButton)
-
             // Create a back button to get back to the poll list
             let back = document.createElement("button")
             back.classList.add("textbutton")
@@ -342,6 +337,9 @@ function displayResults(pollData) {
                         winnerName.appendChild(document.createTextNode(pollData.candidate_names[winnerIndex]))
                         winnerList.appendChild(winnerName)
                     }
+                    // Lastly, include some advice on resolving the tie
+                    let notice = document.createElement("p")
+                    notice.innerHTML = "If a tie occurred in a real election, then the case would go to court and the election would likely have to be repeated. Since this is hopefully lower stakes, if the person who created the poll hasn't voted, they could choose a winner. Alternatively, <a href='https://pickerwheel.com/'>pick a random option from the tied options</a>! You could also use a different method of preferential voting on a different site like strawpoll but <a href='https://ncase.me/ballot/'>all of the options are at least a little bit flawed</a>."
                 }
                 // Now print everyone who was tied for the win
                 let runnerUpTitle = document.createElement("p")
@@ -389,6 +387,23 @@ function displayResults(pollData) {
                 partyList.appendChild(partyEntry)
             }
 
+            // Button container
+            let buttonRow = document.createElement("div")
+            buttonRow.classList.add("row")
+            children.push(buttonRow)
+
+            // Button to view all votes
+            let allVotesButton = document.createElement("button")
+            allVotesButton.appendChild(document.createTextNode("View All Votes"))
+            allVotesButton.onclick = () => { viewAllVotes(pollData) }
+            buttonRow.appendChild(allVotesButton)
+
+            // Create a button to view how the results were calculated
+            let viewDetailsButton = document.createElement("button")
+            viewDetailsButton.appendChild(document.createTextNode("View election calculation details"))
+            viewDetailsButton.onclick = () => { displayPollStages(pollData, pollResults) }
+            buttonRow.appendChild(viewDetailsButton)
+            
             // Create a back button to get back to the poll info
             let back = document.createElement("button")
             back.classList.add("textbutton")
@@ -680,7 +695,7 @@ function submitPoll() {
     }
     // Checking side value
     let randomiseBefore = document.getElementById("randomise_before").checked
-    // Getting candidate deets
+    // Getting candidate details
     let candidateChildren = Array.from(candidateList.children)
     // Shuffling if requested
     if (randomiseBefore) {
@@ -722,6 +737,95 @@ function submitPoll() {
             console.log(`Successfully created poll ${pollId}!`)
             displayPoll(pollId)
         })
+}
+
+function displayPollStages(pollData, pollResults) {
+    let display = document.getElementById("poll-container")
+
+    let info = document.createElement("p")
+    info.appendChild(document.createTextNode("Curious how the outcome of the election was calculated? Here's the step-by-step process of eliminating candidates and allowing preferences to flow on until winners are found, if possible.\n\nThis process is how elections counted with preferential polling generally work. If you find that this process doesn't produce a result in your situation (Such as if there are only a small number of votes), then a different voting method may work better for your situation."))
+
+    let stageContainer = document.createElement("div")
+
+    // Data used throughout processing
+    let ignoredParties = []
+    // Iterate through each stage of the election
+    for (let i = 0; i < pollResults.election_stages.length; i++) {
+        // Header
+        let stageHeader = document.createElement("h2")
+        stageContainer.appendChild(stageHeader)
+        stageHeader.appendChild(document.createTextNode(`Round ${i + 1}:`))
+        let tableHeader = document.createElement("h3")
+        stageContainer.appendChild(tableHeader)
+        tableHeader.appendChild("Current vote totals:")
+        // Print the counted votes from this round, excluded any eliminated parties
+        // Creating a table and head
+        let voteTable = document.createElement("table")
+        let tableHead = document.createElement("thead")
+        voteTable.appendChild(tableHead)
+        let headRow = document.createElement("tr")
+        tableHead.appendChild(headRow)
+        let firstLabel = document.createElement("th")
+        headRow.appendChild(firstLabel)
+        firstLabel.setAttribute("scope", "row")
+        firstLabel.appendChild(document.createTextNode("Party Name:"))
+        // Add all current party names
+        for(let partyIndex = 0; partyIndex < pollData.candidate_names.length; partyIndex++) {
+            // Only print if not ignored
+            if (ignoredParties.indexOf(partyIndex) != -1) {
+                let newLabel = document.createElement("th")
+                headRow.appendChild(newLabel)
+                newLabel.setAttribute("scope", "col")
+                newLabel.appendChild(document.createTextNode(pollData.candidate_names[partyIndex]))
+            }
+        }
+        // Next add the vote row
+        let tableBody = document.createElement("tbody")
+        voteTable.appendChild(tableBody)
+        let bodyRow = document.createElement("tr")
+        tableBody.appendChild(bodyRow)
+        let secondLabel = document.createElement("th")
+        bodyRow.appendChild(secondLabel)
+        secondLabel.setAttribute("scope", "row")
+        secondLabel.appendChild(document.createTextNode("Votes this round:"))
+        // And add all current party totals
+        for(let partyIndex = 0; partyIndex < pollData.candidate_names.length; partyIndex++) {
+            // Only print if not ignored
+            if (ignoredParties.indexOf(partyIndex) != -1) {
+                let newLabel = document.createElement("td")
+                bodyRow.appendChild(newLabel)
+                newLabel.appendChild(document.createTextNode(
+                    pollResults.votes_per_stage[i][partyIndex].toFixed(1)
+                ))
+            }
+        }
+
+        // Next, print the results of this round
+        switch(pollResults.election_stages[i][0]) {
+            case "success":
+                // Final stage of a successful election, we're all done!
+                break
+            case "eliminated":
+                // 1 or more parties has been eliminated for not enough votes
+                break
+            case "elected":
+                // 1 or more parties has been elected and removed from the count, but we need more
+                break
+            case "tie":
+                // A tie has occurred, no more election
+                break
+        }
+    }
+
+    // Create a back button to get back to the poll list
+    let back = document.createElement("button")
+    back.classList.add("textbutton")
+    let backBold = document.createElement("b")
+    back.appendChild(backBold)
+    backBold.appendChild(document.createTextNode("Back"))
+    back.setAttribute("onclick", "displayCurrentPolls()")
+
+    display.replaceChildren(info, stageContainer, back)
 }
 
 function handleError(errorResponse) {
