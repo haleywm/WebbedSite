@@ -47,6 +47,7 @@ body {
     .main {
         width: 80%;
         padding: 0 2em;
+        overflow: scroll;
         /*
         p, h1, h2, h3 {
             background-color: color.scale($text-background, $lightness: -10%, $alpha: -70%);

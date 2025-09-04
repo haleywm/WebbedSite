@@ -173,4 +173,6 @@ table {
 
 th, td {
     border: 1px solid color.scale($background, $lightness: -25%);
+    min-width: 5em;
+    padding: 0.2em 0.4em;
 }
