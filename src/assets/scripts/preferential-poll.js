@@ -746,7 +746,7 @@ function displayPollStages(pollData, pollResults) {
     info.appendChild(document.createTextNode("Curious how the outcome of the election was calculated? Here's the step-by-step process of eliminating candidates and allowing preferences to flow on until winners are found, if possible.\n\nThis process is how elections counted with preferential polling generally work. If you find that this process doesn't produce a successful result in your situation (Such as if there are only a small number of votes), then a different voting method may work better for your situation."))
 
     let quota = document.createElement("p")
-    quota.appendChild(document.createTextNode(`The quota for this election, based on the number of voters and the number of candidates needed, is: ${pollResults.quota}`))
+    quota.appendChild(document.createTextNode(`The quota for this election, based on the number of voters and the number of candidates needed, is: ${pollResults.quota.toFixed(1)}`))
 
     let stageContainer = document.createElement("div")
 
@@ -757,13 +757,18 @@ function displayPollStages(pollData, pollResults) {
         // Header
         let stageHeader = document.createElement("h2")
         stageContainer.appendChild(stageHeader)
+        stageHeader.appendChild(document.createElement("hr"))
         stageHeader.appendChild(document.createTextNode(`Round ${i + 1}:`))
         let tableHeader = document.createElement("h3")
         stageContainer.appendChild(tableHeader)
-        tableHeader.appendChild("Current vote totals:")
+        tableHeader.appendChild(document.createTextNode("Current vote totals:"))
         // Print the counted votes from this round, excluded any eliminated parties
         // Creating a table and head
+        let tableContainer = document.createElement("div")
+        stageContainer.appendChild(tableContainer)
+        tableContainer.classList.add("table-container")
         let voteTable = document.createElement("table")
+        tableContainer.appendChild(voteTable)
         let tableHead = document.createElement("thead")
         voteTable.appendChild(tableHead)
         let headRow = document.createElement("tr")
@@ -775,7 +780,7 @@ function displayPollStages(pollData, pollResults) {
         // Add all current party names
         for(let partyIndex = 0; partyIndex < pollData.candidate_names.length; partyIndex++) {
             // Only print if not ignored
-            if (ignoredParties.indexOf(partyIndex) != -1) {
+            if (ignoredParties.indexOf(partyIndex) == -1) {
                 let newLabel = document.createElement("th")
                 headRow.appendChild(newLabel)
                 newLabel.setAttribute("scope", "col")
@@ -820,21 +825,21 @@ function displayPollStages(pollData, pollResults) {
             case "success":
                 // Final stage of a successful election, we're all done!
                 resultDiscussion.appendChild(document.createTextNode(
-                    `Having achieved more than ${pollResults.quota} votes, a winner has been elected. The number of elected parties has been achieved and the election has now been called using all winners (or just one if only one winner was needed.)`
+                    `Having achieved more than ${pollResults.quota.toFixed(1)} votes, a winner has been elected. The number of elected parties has been achieved and the election has now been called using all winners (or just one if only one winner was needed.)`
                 ))
                 listHeader.appendChild(document.createTextNode("Elected:"))
                 break
             case "eliminated":
                 // 1 or more parties has been eliminated for not enough votes
                 resultDiscussion.appendChild(document.createTextNode(
-                    `No candidate has managed to achieve at least ${pollResults.quota} votes. Therefore, the least popular ${pollResults.election_stages[i][1].length > 1 ? "candidates" : "candidate"} will be eliminated, and votes for them will flow on to the next highest preference for all voters.`
+                    `No candidate has managed to achieve at least ${pollResults.quota.toFixed(1)} votes. Therefore, the least popular ${pollResults.election_stages[i][1].length > 1 ? "candidates" : "candidate"} will be eliminated, and votes for them will flow on to the next highest preference for all voters.`
                 ))
                 listHeader.appendChild(document.createTextNode("Eliminated:"))
                 break
             case "elected":
                 // 1 or more parties has been elected and removed from the count, but we need more
                 resultDiscussion.appendChild(document.createTextNode(
-                    `Having achieved more than ${pollResults.quota} votes, ${pollResults.election_stages[i][1].length > 1 ? "candidates are" : "a candidate is"} elected!\nEvery vote which contributed to the candidates election is multiplied by a transfer value of ${pollResults.election_stages[i][2]}, which will allow additional votes beyond the minimum number required to go towards additional candidates.`
+                    `Having achieved more than ${pollResults.quota.toFixed(1)} votes, ${pollResults.election_stages[i][1].length > 1 ? "candidates are" : "a candidate is"} elected!\nEvery vote which contributed to the candidates election is multiplied by a transfer value of ${pollResults.election_stages[i][2].toFixed(2)}, which will allow additional votes beyond the minimum number required to go towards additional candidates.`
                 ))
                 listHeader.appendChild(document.createTextNode("Elected:"))
                 break
@@ -855,10 +860,12 @@ function displayPollStages(pollData, pollResults) {
             case "tie":
                 // A tie has occurred, no more election
                 resultDiscussion.appendChild(document.createTextNode(
-                    `Unfortunately, a tie has occurred. This typically occurs when there are not enough votes for any remaining candidate to be elected (because they have fewer votes than the quota of ${pollResults.quota}), but another round of eliminations would result in all remaining candidates being disqualified.\nGenerally, this happens when either votes are perfectly split between more than two candidates.`
+                    `Unfortunately, a tie has occurred. This typically occurs when there are not enough votes for any remaining candidate to be elected (because they have fewer votes than the quota of ${pollResults.quota.toFixed(1)}), but another round of eliminations would result in all remaining candidates being disqualified.\nGenerally, this happens when either votes are perfectly split between more than two candidates.`
                 ))
                 listHeader.appendChild(document.createTextNode("Tied for election:"))
                 break
+            default:
+                console.error(`Uh oh! Unrecognised category '${pollResults.election_stages[i][0]}'`)
         }
         
         // Add the parties from this round to the list regardless of context
@@ -870,6 +877,13 @@ function displayPollStages(pollData, pollResults) {
 
         // Add parties from this round to ignored party list
         ignoredParties = ignoredParties.concat(pollResults.election_stages[i][1])
+    }
+
+    // Fallback if there's nothing because it's an empty election
+    if (pollResults.election_stages.length == 0) {
+        stageContainer.appendChild(document.createTextNode(
+            "There are currently no votes. You get nothing! You lose! Good day sir!"
+        ))
     }
 
     // Create a back button to get back to the poll list

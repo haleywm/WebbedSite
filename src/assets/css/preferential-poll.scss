@@ -150,3 +150,27 @@ button:active:not(.textbutton, .little) {
 #uncastVotes>li {
     list-style-type: none;
 }
+
+.table-container {
+    width: 100%;
+    height: max-content;
+    overflow-x: scroll;
+}
+
+table {
+    width: 100%;
+    overflow-x: scroll;
+    border: 2px solid color.scale($background, $lightness: -50%);
+    border-collapse: collapse;
+    text-align: center;
+    thead {
+        background-color: color.scale($background, $lightness: 90%);
+    }
+    tbody {
+        background-color: color.scale($background, $lightness: 80%);
+    }
+}
+
+th, td {
+    border: 1px solid color.scale($background, $lightness: -25%);
+}
