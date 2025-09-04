@@ -46,6 +46,13 @@ body {
 
     .main {
         width: 80%;
+        padding: 0 2em;
+        /*
+        p, h1, h2, h3 {
+            background-color: color.scale($text-background, $lightness: -10%, $alpha: -70%);
+            padding: 0.2em 1em;
+        }
+        */
     }
 
     .leftbar {
@@ -130,9 +137,10 @@ img {
     background-clip: text;
     color: transparent;
     width: fit-content;
-    -webkit-text-stroke: $text 1px;
+    -webkit-text-stroke: $text 1.5px;
     margin: 1em auto 0 auto;
     text-align: center;
+    font-size: 3em;
 }
 
 code {
