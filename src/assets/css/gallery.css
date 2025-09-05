@@ -57,6 +57,19 @@
     right: 1vw;
 }
 
-img {
+.image-gallery img {
     cursor: pointer;
+}
+
+.image-gallery p {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: $pad-amount;
+
+    & img {
+        width: calc(100% / 3 - 8px * 2/3);
+        margin: 0;
+    }
 }
